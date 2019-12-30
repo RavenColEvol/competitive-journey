@@ -1,31 +1,15 @@
-#include<bits/stdc++.h>
-
+#include <iostream>
 using namespace std;
 
-int main()
-{
-	long long int n ;
-	cin >> n;
-
-	if( n == 0 ) 
-		cout << "yes" << endl;
-	else 
-	{
-		while(n>0){
-			for( int i = 1; i <= 3 ; i++ )
-			{
-				n -= i ;
-				if( n == 0 ){
-					cout << "yes" << endl;
-					break;
-				}
-				if( n < 0 ){
-					cout << "no" << endl;
-					break;
-				}
-			}	
-		}
-	}
-
+int main() {
+	long long int a;
+    while(cin>>a){
+    	
+    	if(a%6==0||a%6==3||a%6==1)
+    	cout<<"yes"<<endl;
+    	else
+    	cout<<"no"<<endl;
+    	
+    }
 	return 0;
 }

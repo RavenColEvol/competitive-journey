@@ -30,8 +30,11 @@ int main()
 		cout << fixed << setprecision(12) << 1.0;
 	else if(count_undefined < (net_a - net_b))
 		cout << fixed << setprecision(12) << 0.0;
-	else
+	else{
+		//int answer = net_a - net_b;
+
 		cout << fixed << setprecision(12) << count_undefined / (float) pow(2, count_undefined);
+	}
 	cout << endl;
 	return 0;
 }
