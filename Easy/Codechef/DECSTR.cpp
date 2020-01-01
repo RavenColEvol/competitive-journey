@@ -9,8 +9,12 @@ int main()
 	{
 		int n;
 		cin >> n;
-		for(int i = n ; i>=0; i--)
-			cout << (char)('a' + (i % 26));
+		int full = n / 26;
+		while(full--)
+		{
+			for(int i = 25; i >= 0; i--)
+				cout << (char)('a' + i);
+		}
 		cout << endl;
 	}
 	return 0;

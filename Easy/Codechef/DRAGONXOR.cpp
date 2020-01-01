@@ -8,28 +8,12 @@ int main()
 
 	while(t--)
 	{
-		int n, a, b;
+		int n, a ,b ;
 		cin >> n >> a >> b;
-		int zeros[2]={0} , ones[2]={0};
-		for(int i = 0; i < n && a > 0; i++)
-		{
-			a&1 ? ones[0]++ : zeros[0]++;
-			a >>= 1;
-		}
-		for(int i = 0; i < n && b > 0; i++)
-		{
-			b&1 ? ones[1]++ : zeros[1]++;
-			b >>= 1;
-		}
-		
-		if(zeros[0] == ones[1] )
-			cout << (2<<n-1) << endl;
-		else
-		{
-			int val = ones[0]+2*zeros[0]-ones[1];
-			cout << (2<<val - ) << endl;
-		}
-
+		int set_bits = __builtin_popcount(a) + __builtin_popcount(b);
+		int x = ((1<<n) - 1);
+		int y = ((1<<(abs(n-set_bits))) - 1);
+		cout << (x ^ y) << endl;
 	}
 
 	return 0;
