@@ -16,5 +16,21 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
+	ll t;
+	test(t){
+		string s; in s;
+		map<char,char> mp = {{')','('},{']','['},{'}','{'}};
+		stack<char> stk;
+		for(char c : s) {
+			if(!stk.empty() && stk.top() == mp[c])
+				stk.pop();
+			else 
+				stk.push(c);
+		}
+		if(stk.empty())
+			out "YES\n";
+		else
+			out "NO\n";
+	}
 	return 0;
 }

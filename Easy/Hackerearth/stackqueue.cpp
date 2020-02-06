@@ -16,5 +16,17 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
+	ll n, w; cin >> n >> w;
+	vll vi(n);
+	for(ll& i:vi) in i;
+	ll ans = 0;
+	for(int i = 0, j = n-1; w && i < j;)
+	{
+		if(vi[i] > vi[j])
+			ans += vi[i], i++, w--;
+		else
+			ans += vi[j], j--, w--;
+	}
+	out  ans << endl;
 	return 0;
 }

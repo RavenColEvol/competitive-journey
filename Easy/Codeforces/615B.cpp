@@ -16,5 +16,22 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
+	ll t;
+	test(t){
+		ll a,b,c, n;
+		cin >> a >> b >> c >> n;
+		ll eq = (a+b+c+n)/3;
+		bool is_possible = (a+b+c+n)%3;
+		if(is_possible == 0)
+		{
+			if(a <= eq && b <= eq && c <= eq)
+				cout << "YES\n";
+			else
+				cout << "NO\n";
+		}
+		else {
+			cout << "NO\n";
+		}
+	}
 	return 0;
 }

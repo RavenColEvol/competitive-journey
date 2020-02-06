@@ -10,11 +10,16 @@
 #define out cout<<
 #define optimize ios_base::sync_with_stdio(0);cin.tie(NULL);
 using namespace std;
-typedef long long ll;
+typedef long long ll
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
+	ll n; in n;
+	ll arr[n];
+	rep(i,n)
+		in arr[i];
+	
 	return 0;
 }

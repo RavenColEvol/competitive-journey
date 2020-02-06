@@ -16,5 +16,17 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
+	vector<int> vi = {3,2,1,2,2,3};
+	map<int,int> mp;
+	int ans = INT_MAX;
+	for(int i = 0; i < vi.size(); i++) {
+		if(mp[vi[i]] == 0)
+			mp[vi[i]] = i;
+		else{
+			ans = min(ans, i - mp[vi[i]]);
+			mp[vi[i]] = i;
+		}
+	}
+	out ans << endl;
 	return 0;
 }

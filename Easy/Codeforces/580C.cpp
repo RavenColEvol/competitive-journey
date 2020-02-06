@@ -14,7 +14,30 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
+
+int ways(bool* arr, vll cats, ll m, ll index){
+	if(m == 0)
+}
+
 int main(){
 	optimize
+	ll n,m;
+	cin >> n >> m;
+	vll cats(n);
+	rep(i,n){
+		cin >> cats[i];
+	}
+	bool arr[n+1][n+1] = {0};
+	rep(i,n-1){
+		int x,y;
+		cin >> x >> y;
+		arr[x][y] = 1;
+	}
+	for(int i = 1; i <= n; i++){
+		for(int j = 1; j <= n; j++)
+			cout << arr[i][j] << ' ';
+		cout << endl;
+	}
+	cout << ways(arr, cats, m, 1) << endl;
 	return 0;
 }

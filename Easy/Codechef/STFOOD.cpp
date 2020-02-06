@@ -16,5 +16,17 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
+	ll t;
+	test(t){
+		ll n, s, v, p;
+		in n;
+		ll answer = 0;
+		rep(i,n) {
+			cin >> s >> v >> p;
+			ll people = v/(s+1);
+			answer = max(answer, p*people );
+		}
+		out answer << endl;
+	}
 	return 0;
 }

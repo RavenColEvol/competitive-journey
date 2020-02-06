@@ -16,5 +16,16 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
+	ll t;
+	test(t)
+	{
+		ll a,b;
+		cin >> a >> b;
+		ll answer = 0;
+		for(int i = 1; i <= abs(b-a); i++)
+			if(abs(b-a)%i == 0)
+				answer++;
+		cout << answer << endl;
+	}
 	return 0;
 }

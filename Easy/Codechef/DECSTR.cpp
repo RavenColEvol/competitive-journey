@@ -1,21 +1,42 @@
-#include<iostream>
+#include <bits/stdc++.h>
+ 
 using namespace std;
+ 
+typedef long long int ll;
+typedef long double ld;
+
+set<int> arr;
 
 int main()
 {
-	int t ;
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);cout.tie(NULL);
+	
+	int t;
+	
 	cin >> t;
-	while(t--)
-	{
+	while(t--){
 		int n;
+		
 		cin >> n;
-		int full = n / 26;
-		while(full--)
-		{
-			for(int i = 25; i >= 0; i--)
-				cout << (char)('a' + i);
+		
+		string str = "zyxwvutsrqponmlkjihgfedcba";
+		string ans = "";
+		
+		while(n >= 25){
+			n -= 25;
+			ans += str;
 		}
-		cout << endl;
+		
+		if(n > 0){
+		
+			for(int i = 25; i >= 25 - n; i--)
+				ans = str[i] + ans;
+		}
+		
+		cout << ans << endl;
+		
 	}
+	
 	return 0;
-}
+} 

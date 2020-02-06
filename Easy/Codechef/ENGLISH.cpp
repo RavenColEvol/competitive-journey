@@ -1,6 +1,5 @@
 #include<bits/stdc++.h>
 #define REP(i,a,b) for(int i = a; i <= b ; i++)
-#define size(arr) sizeof(arr)/sizeof(arr[0])
 #define fastio ios::sync_with_stdio(0); cin.tie(0);
 #define debug(x) cout << #x << " is " << x << endl;
 
@@ -57,32 +56,24 @@ int main()
 		int n;
 		cin >> n;
 
-		vector<string> arr(n);
-		for(string& s : arr)
-			cin >> s;
-
-		ll ans = 0;
-		vector<bool> visited(n, false);
-		for(int i = 0; i < n; i++)
+		map<string, int> arr;
+		for(int i = 0; i < n ; i++)
 		{
-			int max_score = 0, max_index = 0;
-			if(!visited[i]){
-				for(int j = i + 1; j < n; j++)
-				{
-					if( !visited[j] && areSimilar(arr[i], arr[j]) ){
-						if(max_score < beauty(arr[i], arr[j])){
-							max_score = beauty(arr[i], arr[j]);
-							max_index = j;
-						}
-					}
-				}
-			}
-			else
-				continue;
-			ans += max_score;
-			visited[max_index] = true;
+			string s;
+			cin >> s;
+			arr[s]++;
 		}
-		cout << ans << endl;
+
+		for(auto i : arr)
+			cout << i.first << ' ' << i.second << endl;
+
+		vector<string> p;
+		long long answer = 0;
+		for(auto i : arr)
+		{
+			if( i % 2 == 0)
+				answer += (pow(strlen(i.first),2))
+		}
 	}
 
 	return 0;

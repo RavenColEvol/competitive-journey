@@ -16,5 +16,18 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
+
+	ll t;
+	test(t){
+		ll n,a,b,c;
+		cin >> n >> a >> b >> c;
+		ll near = LLONG_MAX;
+		rep(i,n){
+			ll temp; in temp;
+			if( ( abs(a-temp) + abs(b-temp) + c ) < near)
+				near = ( abs(a-temp) + abs(b-temp) + c );
+		}
+		cout << near << endl;
+	}
 	return 0;
 }

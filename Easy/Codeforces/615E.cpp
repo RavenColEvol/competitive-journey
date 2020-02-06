@@ -16,5 +16,31 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
+	ll m,n;
+	cin >> m >> n;
+
+	ll arr[m][n];
+	for(ll i = 0; i < m; i++)
+	{
+		for(ll j = 0; j < n; j++)
+		{
+			cin >> arr[i][j];
+		}
+	}
+	ll ans = 0;
+
+	for(int i = 0; i < n ; i++)
+	{
+		for(int j = 0; j < m; j++)
+		{
+			if(arr[i][j] == i+1){
+				ans += (j+1);
+				break;
+			}
+		}
+	}
+
+	cout << ans ;
+
 	return 0;
 }

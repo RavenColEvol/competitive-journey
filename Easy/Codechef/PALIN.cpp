@@ -14,7 +14,23 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
+string next_palin(string n) {
+	ll len	   = ans.size();
+
+	if(len % 2 == 0) {
+
+	}
+
+}
+
 int main(){
 	optimize
+	ll t;
+	string n;
+	test(t) {
+		in n;
+		out next_palin(n);
+		out '\n';
+	}
 	return 0;
 }

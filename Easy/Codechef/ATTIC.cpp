@@ -16,5 +16,29 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
+	ll t;
+	test(t) {
+		string p; in p;
+		if(p == "."){
+			cout << 1 << endl;
+			continue;
+		}
+		ll days = 0;
+		ll jump = 0, len = 0;
+		for(int i = 0; p[i]; i++){
+			if(p[i] == '.')
+			{	
+				len++;
+			}
+			else {
+				if(jump < len){
+					jump = len , days++;
+				}
+				len = 0;
+			}
+		}
+		out days ;
+		cout << endl;
+	}
 	return 0;
 }

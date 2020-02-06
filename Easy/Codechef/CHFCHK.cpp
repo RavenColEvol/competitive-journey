@@ -14,7 +14,21 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
+
+
 int main(){
 	optimize
+	int t;
+	test(t) {
+		int answer = INT_MAX;
+		int n;
+		cin >> n;
+		for(int i = 0; i < n; i++)
+		{
+			int temp; in temp;
+			answer = min(answer, temp);
+		}
+		out answer << endl;
+	}
 	return 0;
 }

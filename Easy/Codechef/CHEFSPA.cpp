@@ -8,6 +8,8 @@ typedef long long ll;
 
 using namespace std;
 
+map<int,int> dp;
+
 int main()
 {
 	fastio
@@ -15,41 +17,28 @@ int main()
 	ll t;
 	cin >> t;
 	
-	test(t)
+	while(t--)
 	{
 		int n;
 		cin >> n;
+		vector<int> vi(2*n);
+		for(int& i:vi)
+			cin >> i;
 
-		if(n == 1)
+		sort(vi.begin(), vi.end());
+
+		dp[vi[0]] = 1;
+
+		for(int i = 1; i < 2*n ; i++)
 		{
-			int a, b;
-			cin >> a >> b;
-			if(a == b)
-				cout << 1 << endl;
-			else
-				cout << 0 << endl;
-		}
-		else{
-			vector<int> vi;
-
-			REP(i, 1, 2*n)
+			if(dp[ vi[i] - vi[i-1]] == 0)
 			{
-				int temp;
-				cin >> temp;
-				vi.emplace_back(temp);
+				dp[vi[i]] = 1;
 			}
-
-			sort(vi.begin(), vi.end());
-
-			int j = vi.size();
-			for(auto i = 0 ; i < j; i++)
-			{
-				if(vi)
+			else if(dp[ vi[i] - vi[i-1] ] == 1){
+				dp[vi[i]] = 2; 
 			}
-
-			cout << ms.size() << endl;
 		}
-
 	}
 
 	return 0;
