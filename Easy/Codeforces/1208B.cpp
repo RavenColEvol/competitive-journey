@@ -12,6 +12,17 @@ int main()
 	fastio
 	
 	int n ; cin >> n ;
+	map<int,int> f,l;
+	REP(i,0,n) {
+		int temp; cin >> temp;
+		if(f.find(temp) != f.end()) {
+			l[temp] = i;
+		}
+		else {
+			f[temp] = i;
+		}
+	}
+
 	
 
 	return 0;

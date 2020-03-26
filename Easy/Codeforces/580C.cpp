@@ -14,30 +14,43 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
+ll n, m, ans = 0, cats[100005];
+bool visited[100005] = {0};
+vector<int> graph[100005];
 
-int ways(bool* arr, vll cats, ll m, ll index){
-	if(m == 0)
+void dfs(ll index, ll cats_count) {
+	bool reached_end = true ;
+	visited[index] = true;
+	if(cats_count > m) return;
+
+	for(int i = 0; i < graph[index].size(); i++) {
+		if(!visited[graph[index][i]]) {
+			if(cats[graph[index][i]] == 0)
+				dfs(graph[index][i], 0);
+			else dfs(graph[index][i], cats_count + 1);
+
+			reached_end = false;
+		}
+	}
+
+	ans += reached_end;
 }
 
 int main(){
 	optimize
-	ll n,m;
 	cin >> n >> m;
-	vll cats(n);
-	rep(i,n){
-		cin >> cats[i];
-	}
-	bool arr[n+1][n+1] = {0};
-	rep(i,n-1){
-		int x,y;
+	rep(i,n) cin >> cats[i];
+	rep(i,n-1) {
+		int x,y ;
 		cin >> x >> y;
-		arr[x][y] = 1;
+		x--,y--;
+		graph[x].push_back(y);
+		graph[y].push_back(x);
 	}
-	for(int i = 1; i <= n; i++){
-		for(int j = 1; j <= n; j++)
-			cout << arr[i][j] << ' ';
-		cout << endl;
-	}
-	cout << ways(arr, cats, m, 1) << endl;
+
+	dfs(0, cats[0]);
+
+	cout << ans << '\n';
+
 	return 0;
 }

@@ -11,10 +11,16 @@ int main()
 	fastio
 	int t;
 	cin >> t;
-	int b[5001], a[5001];
-	REP(i,0,t-1) {
-		cin >> b[i] >> a[i];
+	vector<pair<int,int>> a(t);
+	for(auto& i : a) cin >> i.first >> i.second;
+	sort(a.begin(), a.end());
+	int best = -1;
+	for(auto i : a) {
+		if(best <= i.second) {
+			best = i.second;
+		}
+		else best = i.first;
 	}
-	
+	cout << best << endl;
 	return 0;
 }
