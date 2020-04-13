@@ -16,6 +16,14 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
-	cout << "no";
+    ll t;
+    test(t) {
+        string inp; in inp;
+        set<char> s;
+        for(char c : inp) {
+            s.insert(c);
+        }
+        cout << s.size() << '\n';
+    }
 	return 0;
 }

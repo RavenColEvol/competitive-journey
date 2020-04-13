@@ -1,49 +1,31 @@
 #include <bits/stdc++.h>
-typedef long long ll;
-typedef pair<ll, ll> pll;
 using namespace std;
+typedef long long ll;
+typedef pair <ll, ll> pll;
 
 int main()
 {
-    ll m, x, y;
+    ll m, x, y, temp, ans = 0;
     cin >> m >> x >> y;
-    vector<bool> order(m, 0);
-    vector<pll> andey(m), bob(m);
-    for (ll i = 0; i < m; i++)
-    {
-        ll a;
-        cin >> a;
-        andey[i] = {a, i};
+    vector<ll> p(m), q(m);
+    vector<pll> orders(m);
+    for(ll i = 0; i < m; i++) {
+        cin >> p[i];
     }
-    for (ll i = 0; i < m; i++)
-    {
-        ll a;
-        cin >> a;
-        bob[i] = {a, i};
+    for(ll i = 0; i < m; i++) {
+        cin >> q[i];
+        orders[i] = {abs(p[i] - q[i]), i};
     }
-    sort(andey.begin(), andey.end(), greater<ll>());
-    sort(bob.begin(), bob.end(), greater<ll>());
 
-    ll ans = 0;
+    sort(orders.begin(), orders.end(), greater<pll>());
     
-    for (ll i = 0; i < m && x && y; i++)
-    {
-        if (order[i] == 0)
-        {
-            if (andey[i].first > bob[i].first)
-            {
-                ans += andey[i].first;
-                order[andey[i].second] = 1;
-                x--;
-            }
-            else
-            {
-                ans += bob[i].first;
-                order[bob[i].second] = 1;
-                y--;
-            }
-        }
+    for(ll i = 0; i < m; i++) {
+        ll idx = orders[i].second;
+        if(p[idx] >= q[idx] && x) ans += p[idx], x--;
+        else ans += q[idx], y--;
     }
+
+    cout << ans << '\n';
 
     return 0;
 }

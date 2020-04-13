@@ -22,10 +22,19 @@ int main(){
 		ll a,b;
 		cin >> a >> b;
 		ll answer = 0;
-		for(int i = 1; i <= abs(b-a); i++)
-			if(abs(b-a)%i == 0)
-				answer++;
-		cout << answer << endl;
+		if(a == b) cout << -1 << '\n';
+
+		else {
+			for(ll i = 1, n = abs(a-b); i*i <= n; i++) {
+				if(n % i == 0) {
+					answer += 1;
+					if(i != n/i) ++answer;
+				}
+
+				
+			}
+			cout << answer << '\n';
+		}
 	}
 	return 0;
 }

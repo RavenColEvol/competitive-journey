@@ -16,6 +16,10 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
-	cout << "no";
+    ll t, n; cin >> t;
+    while(t--) {
+        cin >> n;
+        cout << n << '\n';
+    }
 	return 0;
 }

@@ -12,10 +12,15 @@
 using namespace std;
 typedef long long ll;
 typedef vector<ll> vll;
-typedef pair<ll,ll>pll;
+typedef pair<ll,ll> pll;
 
 int main(){
 	optimize
-	cout << "no";
+
+    ll t; in t;
+    while(t--) {
+        
+    }
+
 	return 0;
 }

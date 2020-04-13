@@ -14,8 +14,25 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
+string email ;
+
+string solve() {
+    // handle @
+    ll at_pos = email.find("at", 1);
+    if(at_pos != string::npos)
+    email.replace(at_pos, 2, "@");
+    // handle dot
+    ll pos = email.find("dot", 1);
+    while( pos != string::npos && email.size() != pos + 3) {
+        email.replace(pos, 3, ".");
+        pos = email.find("dot", 1);
+    }
+    return email;
+}
+
 int main(){
 	optimize
-	cout << "no";
+    in email;
+    out solve();
 	return 0;
 }
