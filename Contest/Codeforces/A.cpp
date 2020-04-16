@@ -1,29 +1,28 @@
 #include<bits/stdc++.h>
-#define FIO ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL)
+#define test(t) for(cin>>t;t;--t)
+#define rep(i,n) for(ll i=0;i<n;i++)
+#define repr(i,k,n) for(ll i=k;i<n;i++)
+#define repr_r(i,n) for(ll i=n-1;i>=0;i--)
+#define mp make_pair
+#define pb push_back
+#define f first
+#define sec second
+#define in cin>>
+#define out cout<<
+#define endl '\n'
+#define optimize ios_base::sync_with_stdio(0);cin.tie(NULL);
 using namespace std;
 typedef long long ll;
+typedef vector<ll> vll;
+typedef pair<ll,ll>pll;
 
-int main()
-{
-	FIO;
-	ll t, n, temp, start, k;
-    cin >> t;
-    while(t--) {
-        cin >> n >> k;
-        set<ll> s;
-        for(ll i = 0; i < n; i++) {
-            cin >> temp;
-            s.insert(temp);
-        }
-        start = 1;
-        while(1) {
-            if(s.find(start) == s.end()) {
-                if(k == 0) break;
-                k--;
-            }
-            start++;
-        }
-        cout << start - 1 << '\n';
+int main(){
+	optimize
+    ll t;
+    test(t) {
+        ll a, b, c, d;
+        cin >> a >> b >> c >> d;
+        cout << b << ' ' << c << ' ' << c << '\n';
     }
 	return 0;
 }
