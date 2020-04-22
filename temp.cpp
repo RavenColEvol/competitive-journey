@@ -14,19 +14,35 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
+ll solve(vll v, ll x) {
+	if(x == 0) return 0;
+	ll sol = INT_MAX;
+	for(int i : v) {
+		if(x - i >= 0) sol = min(sol, solve(v, x-i) + 1);
+	}
+	return sol;
+}
+
 int main(){
 	optimize
-	vector<int> vi = {3,2,1,2,2,3};
-	map<int,int> mp;
-	int ans = INT_MAX;
-	for(int i = 0; i < vi.size(); i++) {
-		if(mp[vi[i]] == 0)
-			mp[vi[i]] = i;
-		else{
-			ans = min(ans, i - mp[vi[i]]);
-			mp[vi[i]] = i;
+	vll v = {1,3,5};
+	ll x = 12;
+	vll dp(x+1,INT_MAX), first(x+1);
+	dp[0] = 0;
+	for(ll i = 1; i <= x; i++) {
+		for(ll j : v) {
+			if(i-j >= 0 && dp[i-j] + 1 < dp[i])
+			dp[i] = dp[i-j] + 1, first[i] = j;
 		}
 	}
-	out ans << endl;
+	ll n = x;
+	for(ll i : first) cout << i << ' ';
+	cout << '\n';
+	while(n > 0) {
+		cout << first[n] << ' ';
+		n -= first[n];
+	}
+	cout << '\n';
+	cout << dp[x] << '\n';
 	return 0;
 }
