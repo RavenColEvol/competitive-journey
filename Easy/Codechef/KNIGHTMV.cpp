@@ -3,44 +3,28 @@
 using namespace std;
 typedef long long ll;
 
-bool iscorrect(string s)
-{
-    if (s[2] != '-')
-        return false;
-    if (isdigit(s[1]) == false || isdigit(s[4]) == false || s[1] == '0' || s[4] == '0' || s[1] > '8' || s[4] > '8')
-        return false;
-    return isalpha(s[0]) && isalpha(s[3]) && s[0] < 'i' && s[3] < 'i';
+int g(char x) {
+    return x - 'a' + 1;
 }
 
-bool isright(string s)
-{
-    bool x = false, y = false;
-    for (int i : {-2, 2})
-    {
-        if (s[0] + i == s[3] && isalpha(s[0] + i))
-        {
-            for (int i : {-1, 1})
-            {
-                if (s[1] + i == s[4] && isdigit(s[1] + i))
-                {
-                    return true;
-                }
-            }
-        }
-    }
-    for (int i : {-2, 2})
-    {
-        if (s[1] + i == s[4] && isdigit(s[1] + i))
-        {
-            for (int i : {-1, 1})
-            {
-                if (s[0] + i == s[3] && isalpha(s[0] + i))
-                {
-                    return true;
-                }
-            }
-        }
-    }
+int h(char x) {
+    return x - '0'; 
+}
+
+bool not_correct(string s) {
+    if(s.size() != 5) return true;
+    if(s[2] != '-') return true;
+    for(int i : {0, 3})
+        if(g(s[i]) > 8 || g(s[i]) < 1) return true;
+    for(int i : {1, 4})
+        if(h(s[i]) > 8 || h(s[i]) < 1) return true;
+    return false;
+}
+
+bool correct_move(string s) {
+    int d = abs(s[0] - s[3]);
+    int x = abs(s[1] - s[4]);
+    if((x == 1 && d == 2) || (x == 2 && d == 1)) return true;
     return false;
 }
 
@@ -49,20 +33,18 @@ int main()
     FIO;
     ll t;
     cin >> t;
-    string s;
-    getline(cin, s);
-    while (t--)
-    {
+    cin.get();
+
+    while(t--) {
+        string s;
         getline(cin, s);
-        if (iscorrect(s))
-        {
-            if (isright(s))
+        
+        if(not_correct(s)) cout << "Error\n";
+        else {
+            if(correct_move(s)) {
                 cout << "Yes\n";
-            else
-                cout << "No\n";
+            } else cout << "No\n";
         }
-        else
-            cout << "Error\n";
     }
     return 0;
 }

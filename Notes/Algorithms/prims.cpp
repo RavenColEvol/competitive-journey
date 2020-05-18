@@ -3,54 +3,47 @@
 using namespace std;
 typedef long long ll;
 
-ll minkey(vector<ll> key, vector<bool> visited) {
-    ll mi = 0, mv = INT_MAX;
+const int mex = 1e4 + 5;
+typedef pair<int, int> pii;
+bool marked[mex];
+vector<pii> adj[mex];
 
-    for(ll i = 0; i < key.size(); i++) {
-        if(visited[i] == false && key[i] < mv) {
-            mv = key[i], mi = i;
+int prim(int x) {
+    priority_queue<pii, vector<pii>, greater<pii> > Q;
+    int y;
+    int minimumCost = 0;
+    pii p;
+    Q.push(make_pair(0, x));
+
+    while(!Q.empty()) {
+        p = Q.top();
+        Q.pop();
+        x = p.second;
+        if(marked[x] == true) continue;
+        minimumCost += p.first;
+        marked[x] = true;
+        for(int i = 0; i < adj[x].size(); ++i) {
+            y = adj[x][i].second;
+            if(marked[y] == false)
+                Q.push(adj[x][i]);
         }
     }
-    return mi;
-}
-
-void printMST(vector<ll> parent, vector<vector<ll>> graph)  
-{  
-    cout<<"Edge \tWeight\n";  
-    for (int i = 1; i < graph.size(); i++)  
-        cout<<parent[i]<<" - "<<i<<" \t"<<graph[i][parent[i]]<<" \n";  
-}  
-
-void primMST(vector<vector<ll>> graph) {
-    vector<ll> parent(graph.size()), key(graph.size(), INT_MAX);
-    vector<bool> visited(graph.size(), 0);
-
-    parent[0] = -1;
-    key[0] = 0;
-
-    for(int i = 0; i < graph.size(); i++) {
-        ll u = minkey(key, visited);
-        visited[u] = true;
-
-        for(ll v = 0; v < graph.size(); v++) {
-            if(graph[u][v] && visited[v] == false && graph[u][v] < key[v]) {
-                key[v] = graph[u][v], parent[v] = u;
-            }
-        }
-    }
-
-    printMST(parent, graph);
-
+    
+    return minimumCost;
 }
 
 int main()
 {
 	FIO;
-	vector<vector<ll>> graph = { { 0, 2, 0, 6, 0 },  
-                        { 2, 0, 3, 8, 5 },  
-                        { 0, 3, 0, 0, 7 },  
-                        { 6, 8, 0, 0, 9 },  
-                        { 0, 5, 7, 9, 0 } };
-    primMST(graph);
+	int nodes, edges, x, y;
+    int weight, minimumCost;
+    cin >> nodes >> edges;
+
+    for(int i = 0; i < edges; ++i)
+    {
+        cin >> x >> y >> weight;
+        adj[x].push_back(make_pair(weight, y));
+        adj[y].push_back(make_pair(weight, x));
+    }
 	return 0;
 }

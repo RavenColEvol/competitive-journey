@@ -18,17 +18,28 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
-    ll t; cin >> t;
+    ll t, a, b, x ; 
+    cin >> t;
+    vector<int> m;
     while(t--) {
-        ll n; cin >> n;
-        ll s = 0, p = 0;
-        while(1) {
-            s += (1LL << p);
-            if(p > 0 && n % s == 0) {
-                cout << n / s << '\n';
-                break;
+        cin >> a >> b;
+        x = a;
+        vector<int> arr(b), dp(b + 1, 0), cp(a + 1, 0);
+        while(a--) {
+            for(int& i : arr) cin >> i;
+            dp[0] = 0;
+            dp[1] = arr[0];
+            for(int i = 2; i <= b; i++) {
+                dp[i] = max(dp[i-1], dp[i-2] + arr[i-1]);
             }
-            p++;
+            m.push_back(dp[b]);
+        }
+        if(x == 1) cout << 0 << '\n';
+        else if(x == 2) cout << min(m[0], m[1]) << '\n';
+        else if(x == 3) {
+            cout << min({m[0] + m[2], m[1]}) << '\n';
+        } else {
+            cout << min({m[0] + m[2], m[1] + m[3], *min_element(m.begin(), m.end())}) << '\n';
         }
     }
 	return 0;
