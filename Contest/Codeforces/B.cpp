@@ -16,43 +16,13 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
-bool isprime(ll n) {
-    if(n <= 1) return false;
-
-    if(n == 2 || n == 3) return true;
-
-    if(n % 2 == 0) return false;
-
-    for(ll i = 3; i*i <= n; i+=2) if(n % i == 0) return false;
-
-    return true;
-}
-
 int main(){
 	optimize
-    ll n; cin >> n;
-    ll x, y, z; 
-    for(ll i = n; i > 1; i--) {
-        if(isprime(i)) {
-            x = i; break;
-        }
-    }
-    if(x == n) {
-        cout << 1 << '\n' << x ;
-        return 0;
-    }
-    for(ll j = 2; j <= n - x; j++) {
-        if(!isprime(j)) continue;
-        if(x+j == n) {
-            cout << 2 << '\n' << x << ' ' << j;
-            return 0;
-        }
-        for(ll k = 2; k <= n - x - j; k++) {
-            if(!isprime(k)) continue;
-            if(x+j+k == n) {
-                cout << 3 << '\n' << x << ' ' << j << ' ' << k;
-                return 0;
-            }
+    int n; cin >> n;
+    string s; cin >> s;
+    for(int i = 1; i < n; i++) {
+        for(int j = i-1; j >= 0 && j >= i - 3; j--) {
+            
         }
     }
 	return 0;

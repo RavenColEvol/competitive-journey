@@ -6,6 +6,6 @@ typedef long long ll;
 int main()
 {
 	FIO;
-
+	
 	return 0;
 }
