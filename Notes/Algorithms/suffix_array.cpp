@@ -9,15 +9,18 @@ int main()
 {
 	FIO;
     vector< pair<string, int> > st;
-    string s = "banana", temp = "";
-    int n = s.size();
-    for(int c = n; c >= 0; c--) {
-        st.push_back({temp, c + 1});
-        temp = s[c-1] + temp;
+    string s, temp = "", q;
+    cin >> s >> q;
+    int n = s.size(), m = q.size();
+    for(int c = n-1; c >= 0; c--) {
+        temp = s[c] + temp;
+        st.push_back({temp, c});
     }
     sort(st.begin(), st.end());
     for(auto i : st) {
-        cout << i.first << ' ' << i.second << '\n';
+        if(i.first.substr(0, m) == q) {
+            cout << i.second << ' ';
+        }
     }
 	return 0;
 }
