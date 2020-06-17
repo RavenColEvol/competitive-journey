@@ -3,17 +3,26 @@
 using namespace std;
 typedef long long ll;
 
+int t, a, b, c, x, y, ans = 1;
+
+int pour(int a, int b, int c) {
+    int m = 1, x = a, y = 0, trf;
+    while(x != c || y != c) {
+        
+    }
+}
+
 int main()
 {
 	FIO;
-	int t, a, b, c; cin >> t;
+	cin >> t;
     while(t--) {
         cin >> a >> b >> c;
-        if(a == c || b == c) {
-            cout << 1 << '\n';
-        }
-        else if( abs(a-b) == c ) cout << 2 << '\n';
-        else cout << "-1\n";
+        if(a > b) swap(a, b);
+        if(c > max(a, b) || c % __gcd(a, b) != 0) cout << "-1\n";
+        else {
+            cout << min(pour(a, b, c), pour(b, a, c)) << '\n';
+        } 
     }
 	return 0;
 }

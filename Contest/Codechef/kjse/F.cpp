@@ -5,19 +5,6 @@ using namespace std;
 typedef long long ll;
 typedef vector<ll> vll;
 
-bool vis[105] = {0};
-
-ll dfs(ll n, vector<vll> g) {
-    vis[n] = true;
-    int dep = 0;
-
-    for(ll i : g[n]) {
-        if(!vis[i]) dep += dfs(i, g) + 1;
-    }
-
-    return dep;
-}
-
 int main()
 {
 	FIO;
@@ -27,40 +14,51 @@ int main()
         ll n, q; cin >> n >> q;
         vector<ll> arr(n, 0);
         vector<vll> g(102);
+        set<pair<ll,ll>> s;
         
         while(q--) {
             string p1, p2; cin >> p1 >> p2;
             ll a = p1[1] - '1', b = p2[1] - '1';
-            arr[b]++;
-            g[a].push_back(b);
+            if(s.find({a, b}) == s.end()) {
+                g[a].push_back(b);
+                arr[b]++;
+            }
         }
 
-        vector<ll> ans;
-        rep(k, 0, n) {
-            ll mv = INT_MIN, mi = -1;
-            for(ll i = 0; i < n; i++) {
+        ll cnt = 0, root = -1;
+        for(ll i = 0; i < n; i++) {
+            if(arr[i] == 0) {
+                cnt++;
+                root = i;
+            }
+        }
+
+        if(cnt != 1) {
+            cout << "NO\n";
+            continue;
+        }
+
+        queue<int> Q; Q.push(root);
+        vll ans; ans.push_back(root);
+        while(!Q.empty()) {
+            ll top = Q.front(); Q.pop();
+            for(ll i : g[top]) {
+                arr[i]--;
                 if(arr[i] == 0) {
-                    memset(vis, false, sizeof(vis));
-                    ll d = dfs(i, g);
-                    if(mv < d) {
-                        mv = d;
-                        mi = i;
-                    }
+                    ans.push_back(i);
+                    Q.push(i);
                 }
             }
-            if(mi == -1) break;
-            ans.push_back(mi + 1);
-            arr[mi] = -1;
-            for(ll j : g[mi]) arr[j]--;
         }
+
         if(ans.size() != n) {
             cout << "NO\n";
-        }else {
-            cout << "YES\n";
-            reverse(ans.begin(), ans.end());
-            for(ll i : ans) {
-                cout << 'k' << i << '\n';
-            }
+            continue;
+        }
+
+        cout << "YES\n";
+        for(auto i = ans.rbegin(); i != ans.rend(); i++) {
+            cout << 'k' << (*i) + 1 << '\n';
         }
     }
 	return 0;
