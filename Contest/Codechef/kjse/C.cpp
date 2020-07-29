@@ -18,18 +18,53 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
-    ll t;
-    test(t) {
-        ll a, b; cin >> a >> b;
-        if(b <= a) cout << b << '\n';
-        else {
-            b -= a;
-            ll t = b / (a-1);
-            b %= (a-1);
-            if(t & 1) {
-                cout << b + 1 << '\n';
-            } else cout << (a - b) << '\n';
-        }
-    }
+    ll t; cin >> t;
+	while(t--) {
+		ll n; cin >> n;
+		vector<vector<ll>> g(n, vector<ll>(n));
+		for(ll i = 0; i < n; i++)
+			for(ll j = 0; j < n; j++)
+				cin >> g[i][j];
+
+		vector<ll> d(n, INT_MAX);
+
+		d[0] = g[0][0];
+		
+		for(ll i = 0; i < n; i++) {
+			for(ll j = 0; j < n; j++) {
+				if(d[i] + g[i][j] < d[j]) {
+					d[j] = d[i] + g[i][j];
+				}
+			}
+		}
+
+		bool possible = false;
+		
+		for(ll i : d) {
+			if(i < -10) {
+				possible = true;
+				break;
+			}
+		}
+		if(possible) {
+			cout << "YES\n";
+			continue;
+		}
+		
+		for(ll i = 0; i < n; i++) {
+			if(possible) break;
+			for(ll j = 0; j < n; j++) {
+				if(d[i] + g[i][j] < d[j]) {
+					possible = true;
+					break;
+				}
+			}
+		}
+		if(possible) {
+			cout <<"YES\n";
+			continue;
+		}
+		cout << "NO\n";
+	}
 	return 0;
 }

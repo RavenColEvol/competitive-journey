@@ -19,27 +19,10 @@ typedef pair<ll,ll>pll;
 
 int main(){
 	optimize
-    ll t; cin >> t;
-    while(t--) {
-        ll n; cin >> n;
-        ll h = n/2;
-        if(h & 1) {
-            cout << "NO\n";
-        }
-        else {
-            cout << "YES\n";
-            for(int i = 1; i <= h; i++) {
-                cout << 2*i << ' ';
-            }
-            ll x = h;
-            for(int i = h; i >= 1; i--, x-=2) {
-                if(x > 0)
-                cout << 2*i - 1 + 2 << " ";
-                else 
-                cout << 2*i - 1 << ' ';
-            }
-            cout << '\n';
-        }
-    }
+    ll n, t, k; 
+	cin >> n >> t >> k;
+	vector<ll> arr(n);
+	for(ll& i : arr) cin >> i;
+	cout << (arr[k] ^ arr[k + t]) << '\n';
 	return 0;
 }

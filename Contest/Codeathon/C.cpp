@@ -8,23 +8,18 @@ typedef vector<ll> vll;
 int main()
 {
 	FIO;
-    ll n; cin >> n;
-    vector<pair<ll,ll>> arr(n);
-    for(pair<ll,ll>& i : arr) cin >> i.first >> i.second;
-
-    if(n <= 2) cout << n ;
-    else {
-        ll c = 2;
-        for(ll i = 1; i < n-1; i++) {
-            if(arr[i].first - arr[i].second > arr[i-1].first) {
-                c++;
-            }
-            else if(arr[i].first + arr[i].second < arr[i+1].first) {
-                c++;
-                arr[i].first += arr[i].second;
-            }
+    ll t, l, i; cin >> t;
+    while(t--) {
+        string s, to, temp; cin >> l >> s;
+        to = s;
+        sort(to.begin(), to.end());
+        for(ll i = 0; i < l; i++) {
+            if(s[i] == to[i]) continue;
+            ll pos = s.find_first_of(to[i], i);
+            temp = s.substr(0, i) + s.substr(pos, s.size() - pos) + s.substr(i, pos);
+            s = temp;
         }
-        cout << c;
+        cout << s << '\n';
     }
 	return 0;
 }

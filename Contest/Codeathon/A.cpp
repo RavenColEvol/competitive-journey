@@ -5,14 +5,36 @@ using namespace std;
 typedef unsigned long long ll;
 typedef vector<ll> vll;
 
+string v = "aeiou";
+
+int mincost(char c) {
+    int ans = 26;
+    for(char x : v) {
+        ans = min(abs(x - c), ans);
+    }
+    return ans;
+}
+
+bool isv(char c) {
+    for(char x : v) {
+        if(x == c) return true;
+    }
+    return false;
+}
+
 int main()
 {
 	FIO;
-    ll a, b; cin >> a >> b;
-    while(b-- && a) {
-        if(a % 10 == 0) a /= 10;
-        else a -= 1;
+    ll t; cin >> t;
+    while(t--) {
+        string s; cin >> s;
+        ll ans = 0;
+        for(char x : s) {
+            if(!isv(x)) {
+                ans += mincost(x);
+            }
+        }
+        cout << ans << '\n';
     }
-    cout << a << '\n';
 	return 0;
 }

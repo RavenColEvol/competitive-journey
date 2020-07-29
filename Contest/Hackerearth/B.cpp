@@ -1,47 +1,28 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+bool dfs(vector<vector<bool>> arr, int x = 0, int y = 0) {
+	if()
+}
+
 int main()
 {
-	int l, m, n, k, ans = 0, total_capacity ;
-	cin >> l >> m >> n >> k;
-	if(k == 1) {
-		cout << l+m+n << endl;
+	int n, m;
+	cin >> n >> m;
+	vector<vector<bool>> arr(n, vector<bool>(m)), ans(n, vector<bool>(m, 0));
+	char x;
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < m; j++) {
+			cin >> x;
+			arr[i][j] = x == '#' ? 0 : 1;
+		}
 	}
-	else {
-		ans += l;
-		total_capacity = (k-1)*l;
-		if(total_capacity % 2 == 0) {
-			m -= total_capacity /2;
-			n -= total_capacity /2;
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < m; j++) {
+			arr[i][j] = !arr[i][j];
+			ans[i][j] = dfs(arr);
+			arr[i][j] = !arr[i][j];
 		}
-		else {
-			if(m > n){
-				m -= total_capacity /2 + 1;
-				n -= total_capacity /2;
-			}
-			else {
-				m -= total_capacity /2 ;
-				n -= total_capacity /2 + 1;
-			}
-		}
-		if( m == n) {
-			ans += n/(k/2) ;
-			n -= (n/(k/2))*(k/2);
-			ans += (n%2==0?0:1);
-		}
-		else if( m > n) {
-			ans += n/(k/2);
-			m -= n/(k/2) ;
-			ans += m;
-		}
-		else {
-			ans += m/(k/2);
-			n -= m/(k/2) ;
-			ans += n;
-		}
-		cout << ans << endl;
 	}
-	
 	return 0;
 }

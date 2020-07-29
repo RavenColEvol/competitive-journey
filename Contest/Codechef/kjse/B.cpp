@@ -15,51 +15,45 @@ using namespace std;
 typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
-const ll mex = 1e6 + 1;
-ll dsu[mex];
 
-void f(ll n) {
-    rep(i, n) dsu[i] = i;
-}
+vector<ll> ans, sum;
+vector<bool> m(10000005, 0);
 
-ll parent(ll n) {
-    if(dsu[n] == n) return n;
-
-    return dsu[n] = parent(dsu[n]);
-}
-
-void join(ll a, ll b) {
-    a = parent(a);
-    b = parent(b);
-
-    if(a != b) {
-        dsu[a] = b;
+void precompute() {
+    ans.push_back(1);
+    sum.push_back(1);
+    m[0] = 0;
+    for(ll i = 2; ans.size() <= 700; i++) {
+        ll diff = i - ans.back();
+        if(m[diff] == 0) {
+            bool v = true;
+            for(ll j : ans) {
+                if(m[i - j]) {
+                    v = false;
+                    break;
+                }
+            }
+            if(v) {
+                for(ll j : ans) {
+                    m[i - j] = 1;
+                }
+                ans.push_back(i);
+                sum.push_back(i + sum.back());
+            }
+        }
     }
 }
 
 int main(){
 	optimize
-    ll t;
-    test(t) {
-        ll n, r; cin >> n >> r;
-        vector<vector<ll>> arr(n);
-        f(n);
-        rep(i, r) {
-            ll x, y; cin >> x >> y;
-            join(x, y);
-        }
-        rep(i, n) {
-            parent(i);
-        }
-        map<ll, ll> mp;
-        rep(i, n) {
-            mp[dsu[i]]++;
-        }
-        cout << mp.size() << '\n';
-        for(auto i = mp.rbegin(); i != mp.rend(); i++) {
-            cout << (*i).second << ' ';
-        }
+    precompute();
+    //cout << ans.size() << '\n';
+    ll t; cin >> t;
+    while(t--) {
+        ll n; cin >> n;
+        for(ll i = 0; i < n; i++) cout << ans[i] << ' ';
         cout << '\n';
+        cout << sum[n-1] << '\n';
     }
 	return 0;
 }

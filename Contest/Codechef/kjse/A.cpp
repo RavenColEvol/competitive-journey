@@ -16,30 +16,20 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
-ll be(ll a, ll p) {
-    if(p == 0) return 1;
-    ll res = be(a, p/2);
-    res = res*res;
-    if(p&1) res *= a;
-    return res;
-}
-
-ll sog(ll n, ll k, ll r) {
-    if(r == 1) return n*k;
-    return (k * (be(r, n) - 1)) / (r - 1);
-}
-
 int main(){
-	optimize
-    ll t, ext = 0LL;
-    test(t) {
-        ll s, n, k, r; 
-        cin >> s >> n >> k >> r;
-        ll tot = sog(n, k, r);
-        if(tot > s) cout << "IMPOSSIBLE " << tot - s << '\n', ext -= (tot - s);
-        else cout << "POSSIBLE " << s - tot << '\n', ext += (s - tot);
+    ll t; cin >> t;
+    while(t--) {
+        ll n, p, q;
+        cin >> n >> p >> q;
+        p %= q;
+        ll ans = 0;
+        while(n--) {
+            if(p == 0) break;
+            p *= 10;
+            ans += p/q;
+            p %= q;
+        }
+        cout << ans << endl;
     }
-    if(ext >= 0) cout << "POSSIBLE\n";
-    else cout << "IMPOSSIBLE\n";
 	return 0;
 }

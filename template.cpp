@@ -1,13 +1,34 @@
 #include<bits/stdc++.h>
-#define FIO ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL)
-#define rep(i, a, b) for(ll i = a; i < b; ++i)
+#define test(t) for(cin>>t;t;--t)
+#define rep(i,n) for(ll i=0;i<n;i++)
+#define repr(i,k,n) for(ll i=k;i<n;i++)
+#define repr_r(i,n) for(ll i=n-1;i>=0;i--)
+#define mp make_pair
+#define pb push_back
+#define f first
+#define sec second
+#define in cin>>
+#define out cout<<
+#define endl '\n'
+#define optimize ios_base::sync_with_stdio(0);cin.tie(NULL);
 using namespace std;
 typedef long long ll;
 typedef vector<ll> vll;
+typedef pair<ll,ll>pll;
 
-int main()
-{
-	FIO;
+ofstream op;
+
+void solve() {
     
+}
+
+int main(){
+	optimize
+    op.open("op.txt");
+    ll t; cin >> t;
+    rep(i, t) {
+        op << "Case #" << i + 1 << ":\n";
+        solve(); 
+    }
 	return 0;
 }

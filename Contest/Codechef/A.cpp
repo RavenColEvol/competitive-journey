@@ -16,31 +16,27 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
+ll msbpos(ll n) {
+    if(n == 0) return 1;
+    return log2(n) + 1;
+}
+
+
 int main(){
 	optimize
-    ll t, a, b, x ; 
-    cin >> t;
-    vector<int> m;
+    ll t; cin >> t;
     while(t--) {
-        cin >> a >> b;
-        x = a;
-        vector<int> arr(b), dp(b + 1, 0), cp(a + 1, 0);
-        while(a--) {
-            for(int& i : arr) cin >> i;
-            dp[0] = 0;
-            dp[1] = arr[0];
-            for(int i = 2; i <= b; i++) {
-                dp[i] = max(dp[i-1], dp[i-2] + arr[i-1]);
+        ll n; cin >> n;
+        vll arr(n), msb;
+        for(ll& i : arr) cin >> i, msb.push_back(msbpos(i));
+        ll ans = 0LL;
+        for(ll i = 0; i < n; i++) {
+            for(ll j = i + 1; j < n; j++) {
+                ll v = abs(((arr[i]<<msb[j])|(arr[j])) - ((arr[j]<<msb[i])|(arr[i])));
+                ans = max(ans, v);
             }
-            m.push_back(dp[b]);
         }
-        if(x == 1) cout << 0 << '\n';
-        else if(x == 2) cout << min(m[0], m[1]) << '\n';
-        else if(x == 3) {
-            cout << min({m[0] + m[2], m[1]}) << '\n';
-        } else {
-            cout << min({m[0] + m[2], m[1] + m[3], *min_element(m.begin(), m.end())}) << '\n';
-        }
+        cout << ans << '\n';
     }
 	return 0;
 }

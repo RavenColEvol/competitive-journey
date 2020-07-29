@@ -4,7 +4,7 @@
 		{
 			"type": "shell",
 			"label": "C/C++: gcc build active file",
-			"command": "/usr/bin/gcc",
+			"command": "/usr/bin/g++",
 			"args": [
 				"-g",
 				"${file}",
@@ -17,7 +17,10 @@
 			"problemMatcher": [
 				"$gcc"
 			],
-			"group": "build"
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
 		}
 	]
 }

@@ -16,47 +16,74 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
-const int mod = 1e9 + 7, mex = 1e6 + 7;
-ll dp[8005][8005];
-ll solve(vll b, vll c, ll n, ll k) {
-    if(n == 0) return 1;
-    if(k == 0) return 0;
 
-    ll ans = 0;
-    ans = solve(b, c, n, k-1);
-    rep(i, c[k-1]) {
-        if(n >= b[k-1]) {
-            n -= b[k-1];
-            ans += solve(b, c, n, k-1);
+ll t, n, q;
+string s;
+bool f;
+
+struct trie{ 
+    trie* c[26];
+    trie() {
+        for(int i = 0; i < 26; i++) c[i] = nullptr;
+    }
+    bool end = true;
+}* root = new trie();
+
+map<string, int> smp;
+
+void insert(string s) {
+    trie* p = root;
+
+    for(char c : s) {
+        int i = c - 'a';
+        if(!p->c[i]) {
+            p->c[i] = new trie();
+            p->end = false;
         }
+        p = p->c[i];
+    }
+}
+
+void query(int x = 0,int e = 1, trie* at = root, string ans = "", bool re = false) {
+    if(re  && e >= 0) {
+        cout << ans << '\n';
     }
 
-    return  ans;
+    if(e >= 0 && at)  {
+        for(int i = 0; i < 26; i++) {
+            if(at->c[i]) {
+                if(char(i + 'a') == s[x]) {
+                    query(x+1, e, at->c[i], ans + char(i + 'a'), at->c[i]->end);
+                }else {
+                    query(x+1, e-1, at->c[i], ans + char(i + 'a'), at->c[i]->end);
+                    query(x, e-1, at->c[i], ans + char(i + 'a'), at->c[i]->end);
+                }
+            }
+        }
+    }
 }
 
 int main(){
 	optimize
-    ll t;
-    test(t) {
-        ll n, k, x; cin >> n >> k;
-        vll b(k), c(k);
-        for(ll& i : b) cin >> i;
-        for(ll& i : c) cin >> i;
-        repr(i, 0, k+1) dp[i][0] = 1;
-        repr(i, 1, n+1) dp[0][i] = 0;
 
-        repr(i, 1, k+1) {
-            repr(j, 1, n+1) {
-                x = 0;
-                dp[i][j] = dp[i-1][j];
-                repr(l, 0, c[i-1]) {
-                    x += b[i-1];
-                    if(x > j) break;
-                    (dp[i][j] += dp[i-1][j - x]) %= mod;
-                }
+    cin >> t;
+    while(t--) {
+        root = new trie();
+        cin >> n >> q;
+        for(int i = 0; i < n; i++) {
+            cin >> s;
+            smp[s] = 1;
+            insert(s);
+        }
+        for(int i = 0; i < q; i++) {
+            cin >> s;
+            if(smp.find(s) != smp.end()) {
+                cout << s << '\n';
+            }else {
+                f = true;
+                query();
             }
         }
-        cout << dp[k][n] << '\n';
-    }
+    }    
 	return 0;
 }

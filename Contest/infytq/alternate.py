@@ -39,3 +39,10 @@ while i < n:
             fv = i
     i+=1
     
+if fc == -1 or fv == -1:
+    print('X')
+else:
+    i = fc
+    c = True
+    while i < n:
+        if(C)
