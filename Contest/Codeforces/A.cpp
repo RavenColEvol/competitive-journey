@@ -16,31 +16,22 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
+
 int main(){
 	optimize
-    ll n; cin >> n;
-    vector<ll> arr(n);
-    for(ll& i : arr) cin >> i;
-    ll mn = *min_element(arr.begin(), arr.end());
-    ll mx = *max_element(arr.begin(), arr.end());
-    ll v = -1;
-    if(mn == mx || n == 1) cout << 0 << '\n';
-    else {
-        for(ll i = mn; i <= mx; i++) {
-            ll to_make = mx - i;
-            for(ll j = 0; j < n; j++) {
-                if(arr[j] - i != to_make && arr[j] + i != to_make && arr[j] != to_make) {
-                    break;
-                }
-                if(j == n-1) {
-                    v = i;
-                }
-            }
-            if(v != -1) {
+    ll t; cin >> t;
+    while(t--) {
+        ll f = 0, x, y;
+        cin >> x >> y;
+        for(ll i = x; i <= y; i++) {
+            if(y / x > 1) {
+                cout << x << ' ' << (y / x) * x << '\n';
+                f = 1;
                 break;
             }
         }
+        if(!f) 
+        cout << -1 << ' ' << -1 << '\n';
     }
-    cout << v << '\n';
 	return 0;
 }

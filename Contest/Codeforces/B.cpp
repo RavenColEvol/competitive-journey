@@ -16,14 +16,36 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
+ll n, k, z;
+ll arr[100005];
+map<tuple<ll, ll, bool, ll>, ll> dp;
+
+ll solve(ll m = 0, ll at = 0, bool hl = false, ll l = z) {
+    if(m == k + 1) return 0;
+    ll ans = 0;
+
+    if(dp[make_tuple(m, at, hl, z)] != 0) return dp[make_tuple(m, at, hl, z)];
+
+    if(at < n) {
+        ans = solve(m + 1, at + 1, false, l); 
+    }
+    if(at > 0 and hl == false and l)
+        ans = max(ans, solve(m + 1, at - 1, true, l-1));
+
+    ans += arr[at];
+    return dp[make_tuple(m, at, hl, z)] = ans;
+}
+
 int main(){
 	optimize
-    int n; cin >> n;
-    string s; cin >> s;
-    for(int i = 1; i < n; i++) {
-        for(int j = i-1; j >= 0 && j >= i - 3; j--) {
-            
+    ll t; cin >> t;
+    while(t--) {
+        cin >> n >> k >> z;
+        for(ll i = 0; i < n; i++) {
+            cin >> arr[i];
         }
+        cout << solve() << '\n';
+        dp.clear();
     }
 	return 0;
 }

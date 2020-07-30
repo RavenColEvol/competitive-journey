@@ -16,42 +16,49 @@ typedef long long ll;
 typedef vector<ll> vll;
 typedef pair<ll,ll>pll;
 
-ll cities, industry;
-vll levels(100005);
-vector<bool> visited(100005);
+int arr[300005], freq[10], n;
+string s;
+int solveOne(int x) {
+	int ans = 0;
+	for (int i = 0; i < n; i++)
+		if (arr[i] == x)
+			ans++;
+	return ans;
+}
 
-void bfs(vector<vll> graph) {
-    deque<ll> dq;
+int solveTwo(int x, int y) {
+	int ans = 0;
+	for(int i = 0; i < n; i++) {
+		if(ans&1 and arr[i] == x) {
+			ans++;
+		}else if(!(ans&1) and arr[i] == y) ans++;
+	}
+	ans -= (ans & 1);
+	return ans;
+}
 
-    dq.push_back(1);
-    levels[1] = 0;
-    visited[0] = visited[1] = true;
-    while(!dq.empty()) {
-        ll top = dq.front();
-        dq.pop_front();
-        
-        for(ll city : graph[top]) {
-            if(!visited[city]) {
-                dq.push_back(city);
-                visited[city] = true;
-                levels[city] = levels[top] + 1;
-            }
-        }
-    }
+int solve() {
+	rep(i, n) {
+		arr[i] = (int)(s[i] - '0');
+		freq[s[i] - '0']++;
+	}
+	int ans = *max_element(freq, freq + 10);
+	rep(i, 10) {
+		rep(j, 10) {
+			if(i != j) 
+				ans = max(ans, solveTwo(i, j));
+		}
+	}
+	return ans;
 }
 
 int main(){
 	optimize  
-    cin >> cities >> industry;
-    vector<vll> graph(cities + 1);
-    rep(i, cities - 1) {
-        ll x, y; cin >> x >> y;
-        graph[x].push_back(y);
-        graph[y].push_back(x);
+    int t; cin >> t;
+    while(t--) {
+        cin >> s;
+		n = s.size();
+        cout << n - solve() << '\n';
     }
-    bfs(graph);
-    ll total = accumulate(levels.begin(), levels.begin() + cities, 0);
-    cout << total - industry << '\n';
-
 	return 0;
 }
